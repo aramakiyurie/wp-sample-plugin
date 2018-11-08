@@ -39,7 +39,7 @@ class Sample_Plugin_Admin_Db {
 		if ( is_null ( $is_db_exist ) ) {
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-			$query  = "CREATE TABLE wp_sample_post (";
+			$query  = "CREATE TABLE " . $this->table_name . " (";
 			$query .="id MEDIUMINT(9) NOT NULL AUTO_INCREMENT PRIMARY KEY,";
 			$query .="image_url TEXT NOT NULL,";
 			$query .="image_alt TEXT,";
@@ -58,7 +58,6 @@ class Sample_Plugin_Admin_Db {
 			dbDelta( $query );
 		}
 	}
-
 
 
 

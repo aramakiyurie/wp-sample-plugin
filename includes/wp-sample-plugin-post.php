@@ -18,7 +18,7 @@ class Sample_Plugin_Post {
 	public function __construct() {
 		$db = new Sample_Plugin_Admin_Db();
 		$db->insert_options( $_POST );
-		
+
 		$this->page_render();
 	}
 
@@ -45,13 +45,13 @@ class Sample_Plugin_Post {
 		$html .='<th>画像のURL（必須）</th>';
 		$html .='<td>';
 		$html .='<img id="banner-image-view" src="' . plugins_url('../images/no-image.png', __FILE__ ) . '" width="200">';
-		$html .='<input id="banner-image-url" type="text" class="large-text" name="sample-image-url">';
+		$html .='<input id="banner-image-url" type="text" class="large-text" name="sample-image-url" require>';
 		$html .='<button id="media-upload" class="button">画像を選択</button>';
 		$html .='</td>';
 		$html .='</tr>';
 
 		$html .='<tr>';
-		$html .='<th>画像Alt属性（必須）</th>';
+		$html .='<th>画像Alt属性</th>';
 		$html .='<td>';
 		$html .='<input id="banner-image-alt" type="text" class="regular-text" name="sample-image-alt">
 		<p class="description">alt属性のテキストを入力します。</p>';
@@ -95,10 +95,10 @@ class Sample_Plugin_Post {
 		$html .='<h2>表示設定</h2>';
 		$html .='<table class="form-table">';
 		$html .='<tr>';
-		$html .='<th>表示設定（必須）</th>';
+		$html .='<th>表示方法（必須）</th>';
 		$html .='<td>';
-		$html .='<input type="radio" name="sample-how-display">記事の下に表示<br>';
-		$html .='<input type="radio" name="sample-how-display">ショートコードで表示';
+		$html .='<input type="radio" name="sample-how-display"　value ="post_bottom">記事の下に表示<br>';
+		$html .='<input type="radio" name="sample-how-display" value ="shortcode">ショートコードで表示';
 		$html .='</td>';
 		$html .='</tr>';
 

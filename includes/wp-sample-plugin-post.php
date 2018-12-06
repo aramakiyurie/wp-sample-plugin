@@ -17,9 +17,11 @@ class Sample_Plugin_Post {
 
 	public function __construct() {
 		$db = new Sample_Plugin_Admin_Db();
-		$db->insert_options( $_POST );
+		$args = $db->get_options( $_GET['id'] );
+		var_dump( $args );
+		// $db->insert_options( $_POST );
 
-		$this->page_render();
+		$this->page_render( $args );
 	}
 
 	/**
@@ -27,8 +29,9 @@ class Sample_Plugin_Post {
 	*
 	*@version 1.0.0
 	*@since   1.0.0
+	*@param   array 1.0.0
 	*/
-	private function page_render() {
+	private function page_render( $args ) {
 		$html  ='<div class="wrap">';
 		$html .='<h1 class="wp-heading-inline">サンプル登録</h1>';
 
@@ -36,7 +39,7 @@ class Sample_Plugin_Post {
 		echo $html;
 
 		$html  = '<form method="post" action="">';
-		$html .='<input type="hidden" name="sample_id" value="">';
+		$html .='<input type="hidden" name="sample_id" value="' . $args->id . '">';
 
 		$html .='<h2>バナー設定</h2>';
 		$html .='<table class="form-table">';
@@ -45,7 +48,7 @@ class Sample_Plugin_Post {
 		$html .='<th>画像のURL（必須）</th>';
 		$html .='<td>';
 		$html .='<img id="banner-image-view" src="' . plugins_url('../images/no-image.png', __FILE__ ) . '" width="200">';
-		$html .='<input id="banner-image-url" type="text" class="large-text" name="sample-image-url" require>';
+		$html .='<input id="banner-image-url" type="text" class="large-text" name="sample-image-url" required value="' . $args->image_url . '" >';
 		$html .='<button id="media-upload" class="button">画像を選択</button>';
 		$html .='</td>';
 		$html .='</tr>';
@@ -53,7 +56,7 @@ class Sample_Plugin_Post {
 		$html .='<tr>';
 		$html .='<th>画像Alt属性</th>';
 		$html .='<td>';
-		$html .='<input id="banner-image-alt" type="text" class="regular-text" name="sample-image-alt">
+		$html .='<input id="banner-image-alt" type="text" class="regular-text" name="sample-image-alt" value="' . $args->image_alt . '">
 		<p class="description">alt属性のテキストを入力します。</p>';
 		$html .='</td>';
 		$html .='</tr>';
@@ -61,7 +64,7 @@ class Sample_Plugin_Post {
 		$html .='<tr>';
 		$html .='<th>リンクURL</th>';
 		$html .='<td>';
-		$html .='<input type="text" class="large-text" name="sample-image-link">';
+		$html .='<input type="text" class="large-text" name="sample-image-link" value="' . $args->link_url . '">';
 		$html .='<p class="description">URLを入力すると、バナー画像にリンクを設定することができます。</p>';
 		$html .='</td>';
 		$html .='</tr>';
